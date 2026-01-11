@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: ['main']
+    branches: ['unstable']
   pull_request:
-    branches: ['main']
+    branches: ['unstable']
 
 jobs:
   rust:
