@@ -15,6 +15,7 @@
 			cpu = "intel";
 			roles = [ "software-development" ];
 			services = commonServices ++ [ "discord" ];
+			modules = [ ./dummy-hardware.nix ];
 		};
 		nixosConfigurations.desktop = distro.lib.genSystem {
 			hostname = "desktop";
