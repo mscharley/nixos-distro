@@ -15,7 +15,7 @@ jobs:
         install_options: --no-daemon
     - name: Test desktop build
       working-directory: ./tests
-      run: nix build --no-link '.#nixosConfigurations."desktop".config.system.build.toplevel'
+      run: nix eval '.#nixosConfigurations."desktop".config.system.build.toplevel'
     - name: Test laptop build
       working-directory: ./tests
-      run: nix build --no-link '.#nixosConfigurations."laptop".config.system.build.toplevel'
+      run: nix eval '.#nixosConfigurations."laptop".config.system.build.toplevel'
