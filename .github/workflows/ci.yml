@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: ['main']
+  pull_request:
+    branches: ['main']
+
+jobs:
+  rust:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+    - uses: cachix/install-nix-action@4e002c8ec80594ecd40e759629461e26c8abed15 # v31.9.0
+      with:
+        install_options: --no-daemon
+    - name: Test desktop build
+      working-directory: ./tests
+      run: nix build --no-link '.#nixosConfigurations."desktop".config.system.build.toplevel'
+    - name: Test laptop build
+      working-directory: ./tests
+      run: nix build --no-link '.#nixosConfigurations."laptop".config.system.build.toplevel'
