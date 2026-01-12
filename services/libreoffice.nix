@@ -1,4 +1,4 @@
-{ pkgs, lib, config, ... }:
+{ pkgs, lib, desktop, ... }:
 {
 	environment.systemPackages = lib.mkMerge [
 		(with pkgs; [
@@ -7,7 +7,7 @@
 			hunspellDicts.en-gb-large
 			hunspellDicts.en-au-large
 		])
-		(lib.mkIf config.services.desktopManager.plasma6.enable (with pkgs; [ libreoffice-qt-fresh ]))
-		(lib.mkIf (!config.services.desktopManager.plasma6.enable) (with pkgs; [ libreoffice-fresh ]))
+		(lib.mkIf (desktop == "kde") (with pkgs; [ libreoffice-qt-fresh ]))
+		(lib.mkIf (desktop != "kde") (with pkgs; [ libreoffice-fresh ]))
 	];
 }

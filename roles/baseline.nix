@@ -1,6 +1,6 @@
-{ lib, pkgs, ... }:
+{ lib, pkgs, gpu, ... }:
 let
-	amdgpu = pkgs.config.rocmSupport;
+	amdgpu = gpu == "amd";
 in {
 	imports = [
 		# Other base services

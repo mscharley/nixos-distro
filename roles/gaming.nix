@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, pkgs, desktop, ... }:
 {
 	imports = [
 		../services/discord.nix
@@ -6,7 +6,7 @@
 		../services/lutris.nix
 	];
 
-	environment.systemPackages = lib.mkIf config.services.desktopManager.plasma6.enable (with pkgs.kdePackages; [
+	environment.systemPackages = lib.mkIf (desktop == "kde") (with pkgs.kdePackages; [
 		# https://apps.kde.org/categories/games/
 
 		# The classics...
