@@ -14,7 +14,6 @@
 	modules ? [],
 }: let
 	nixpkgs = inputs.nixpkgs;
-	self = inputs.self;
 	sharedConfig = { gpu ? "none" }: {
 		rocmSupport = nixpkgs.lib.mkIf (gpu == "amd") true;
 		cudaSupport = nixpkgs.lib.mkIf (gpu == "nvidia") true;
@@ -40,12 +39,14 @@
 					nix-fast-build
 					colmena;
 			})
+			(_final: prev: {
+				distro = inputs.self.packages.${system};
+			})
 		];
 	};
 	specialArgs = {
 		inherit desktop;
 		flake-inputs = inputs;
-		flake-pkgs = self.packages.${system};
 	};
 in (nixpkgs.lib.nixosSystem {
 	inherit specialArgs;

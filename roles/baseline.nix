@@ -1,4 +1,4 @@
-{ lib, pkgs, flake-pkgs, ... }:
+{ lib, pkgs, ... }:
 let
 	amdgpu = pkgs.config.rocmSupport;
 in {
@@ -63,7 +63,7 @@ in {
 				screen
 
 				# Software
-				vim flake-pkgs.nvf
+				vim distro.nvf
 				git git-lfs gcc
 				fastfetch hyfetch
 				tree
