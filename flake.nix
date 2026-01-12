@@ -36,6 +36,7 @@
 
 			flake = {
 				lib.genSystem = import ./lib/genSystem.nix { inherit inputs; };
+				lib.genUser = import ./lib/genUser.nix;
 			};
 
 			perSystem = { pkgs, ... }: {
