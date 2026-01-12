@@ -18,6 +18,5 @@
 		steamcmd
 		mangohud mangojuice
 		protonup-qt
-		protontricks
 	];
 }
