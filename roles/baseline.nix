@@ -7,6 +7,7 @@ in {
 		../hardware/btrfs.nix
 		../services/sshd.nix
 		../services/command-not-found.nix
+		../services/secureboot.nix
 	];
 
 	config = lib.mkMerge [
@@ -35,10 +36,6 @@ in {
 
 			# Use latest kernel by default
 			boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
-
-			# Use the systemd-boot EFI boot loader.
-			boot.loader.systemd-boot.enable = true;
-			boot.loader.efi.canTouchEfiVariables = true;
 
 			# Enable networking via networkmanager
 			networking.networkmanager.enable = true;
