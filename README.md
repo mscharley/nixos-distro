@@ -18,10 +18,14 @@ I'm currently running this as a daily driver on multiple real systems, however f
 		distro.url = "github:mscharley/nixos-distro/unstable";
 	};
 
-	outputs = { distro, ... }: let
+	outputs = { distro, self, ... }: let
 		commonModules = [ ./shared/home-certificate-authority.nix ];
 		commonServices = [ "tailscale" "1password" ];
 	in {
+		users = {
+			matthew = distro.lib.genUser "matthew" (import ./users/matthew);
+		};
+
 		nixosConfigurations.fw13 = distro.lib.genSystem {
 			hostname = "fw13";
 			system = "x86_64-linux";
@@ -30,7 +34,7 @@ I'm currently running this as a daily driver on multiple real systems, however f
 			hardware = [ "bluetooth" ];
 			roles = [ "software-development" ];
 			services = commonServices ++ [ "discord" ];
-			users = [ ./users/matthew ];
+			users = [ self.users.matthew ];
 			modules = commonModules ++ [ ./hosts/fw13/configuration.nix ];
 		};
 		nixosConfigurations.desktop = distro.lib.genSystem {
@@ -43,7 +47,7 @@ I'm currently running this as a daily driver on multiple real systems, however f
 			extraDesktops = [ "niri" ];
 			roles = [ "software-development" "gaming" ];
 			services = commonServices ++ [ ];
-			users = [ ./users/matthew ];
+			users = [ self.users.matthew ];
 			modules = commonModules ++ [ ./hosts/desktop/configuration.nix ];
 		};
 	};
