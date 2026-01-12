@@ -19,3 +19,6 @@ jobs:
     - name: Test laptop build
       working-directory: ./tests
       run: nix eval '.#nixosConfigurations."laptop".config.system.build.toplevel'
+    - name: Test ARM build
+      working-directory: ./tests
+      run: nix eval '.#nixosConfigurations."arm".config.system.build.toplevel'

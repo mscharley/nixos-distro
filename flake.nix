@@ -35,5 +35,9 @@
 			pkgs = nixpkgs.legacyPackages.x86_64-linux;
 			modules = [ ./packages/nvf.nix ];
 		}).neovim;
+		packages.aarch64-linux.nvf = (nvf.lib.neovimConfiguration {
+			pkgs = nixpkgs.legacyPackages.x86_64-linux;
+			modules = [ ./packages/nvf.nix ];
+		}).neovim;
 	};
 }

@@ -22,9 +22,16 @@
 			system = "x86_64-linux";
 			formFactor = "desktop";
 			cpu = "amd";
-			extraDesktops = [ "niri" ];
 			roles = [ "software-development" "gaming" ];
 			services = commonServices ++ [ "discord" ];
+			modules = [ ./dummy-hardware.nix ];
+		};
+		nixosConfigurations.arm = distro.lib.genSystem {
+			hostname = "arm";
+			system = "aarch64-linux";
+			formFactor = "server";
+			cpu = "arm";
+			roles = [ "software-development" ];
 			modules = [ ./dummy-hardware.nix ];
 		};
 	};
