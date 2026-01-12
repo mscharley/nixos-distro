@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
 	imports = [
 		./baseline.nix
@@ -6,24 +6,6 @@
 		../services/firefox.nix
 		../services/libreoffice.nix
 	];
-
-	# Set your time zone.
-	time.timeZone = lib.mkOverride 900 "Australia/Melbourne";
-
-	# Select internationalisation properties
-	i18n.defaultLocale = lib.mkOverride 900 "en_AU.UTF-8";
-
-	i18n.extraLocaleSettings = lib.mkOverride 900 {
-		LC_ADDRESS = "en_AU.UTF-8";
-		LC_IDENTIFICATION = "en_AU.UTF-8";
-		LC_MEASUREMENT = "en_AU.UTF-8";
-		LC_MONETARY = "en_AU.UTF-8";
-		LC_NAME = "en_AU.UTF-8";
-		LC_NUMERIC = "en_AU.UTF-8";
-		LC_PAPER = "en_AU.UTF-8";
-		LC_TELEPHONE = "en_AU.UTF-8";
-		LC_TIME = "en_AU.UTF-8";
-	};
 
 	# Explicitly disable the X11 windowing system
 	services.xserver.enable = false;

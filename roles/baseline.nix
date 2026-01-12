@@ -23,12 +23,7 @@ in {
 			i18n = {
 				defaultLocale = lib.mkDefault "en_US.UTF-8";
 				defaultCharset = lib.mkDefault "UTF-8";
-				extraLocales = lib.mkDefault [
-					"en_US.UTF-8/UTF-8"
-					"en_GB.UTF-8/UTF-8"
-					"en_AU.UTF-8/UTF-8"
-					"ja_JP.UTF-8/UTF-8"
-				];
+				extraLocales = lib.mkDefault [ "en_US.UTF-8/UTF-8" ];
 			};
 
 			# Use the nh helper for interacting with rebuilds
