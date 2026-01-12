@@ -73,6 +73,7 @@ in {
 			];
 			programs.direnv.enable = true;
 			programs.usbtop.enable = true;
+			programs.iotop.enable = true;
 
 			security = {
 				sudo.enable = false;
