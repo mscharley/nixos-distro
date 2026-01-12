@@ -19,17 +19,16 @@
 	],
 }: let
 	nixpkgs = inputs.nixpkgs;
-	sharedConfig = { gpu ? "none" }: {
-		rocmSupport = nixpkgs.lib.mkIf (gpu == "amd") true;
-		cudaSupport = nixpkgs.lib.mkIf (gpu == "nvidia") true;
-
-		# Global whitelist of specific non-free packages which are acceptable.
-		allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) allowUnfreePackages;
-	};
 	pkgs = import inputs.nixpkgs {
 		inherit system;
 
-		config = sharedConfig { inherit gpu; };
+		config = {
+			rocmSupport = nixpkgs.lib.mkIf (gpu == "amd") true;
+			cudaSupport = nixpkgs.lib.mkIf (gpu == "nvidia") true;
+
+			# Global whitelist of specific non-free packages which are acceptable.
+			allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) allowUnfreePackages;
+		};
 
 		overlays = [
 			# Include our packages in pkgs under the distro namespace
