@@ -4,17 +4,17 @@
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-		flake-parts.url = "github:hercules-ci/flake-parts";
+		flake-parts.url = "github:hercules-ci/flake-parts/main";
 
 		nix-flatpak.url = "github:gmodena/nix-flatpak/main";
 
 		nix-index-database = {
-			url = "github:nix-community/nix-index-database";
+			url = "github:nix-community/nix-index-database/main";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
 		home-manager = {
-			url = "github:nix-community/home-manager";
+			url = "github:nix-community/home-manager/master";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
@@ -25,7 +25,12 @@
 		};
 
 		nvf = {
-			url = "github:notashelf/nvf";
+			url = "github:notashelf/nvf/main";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
+		lanzaboote = {
+			url = "github:nix-community/lanzaboote/v1.0.0";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 	};
