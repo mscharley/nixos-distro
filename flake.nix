@@ -4,6 +4,8 @@
 	inputs = {
 		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+		flake-parts.url = "github:hercules-ci/flake-parts";
+
 		nix-flatpak.url = "github:gmodena/nix-flatpak/main";
 
 		nix-index-database = {
@@ -28,16 +30,19 @@
 		};
 	};
 
-	outputs = inputs@{ nixpkgs, nvf, ... }: {
-		lib.genSystem = import ./lib/genSystem.nix { inherit inputs; };
+	outputs = inputs@{ flake-parts, nvf, ... }: 
+		flake-parts.lib.mkFlake { inherit inputs; } ({ ... }: {
+			systems = [ "x86_64-linux" "aarch64-linux" ];
 
-		packages.x86_64-linux.nvf = (nvf.lib.neovimConfiguration {
-			pkgs = nixpkgs.legacyPackages.x86_64-linux;
-			modules = [ ./packages/nvf.nix ];
-		}).neovim;
-		packages.aarch64-linux.nvf = (nvf.lib.neovimConfiguration {
-			pkgs = nixpkgs.legacyPackages.x86_64-linux;
-			modules = [ ./packages/nvf.nix ];
-		}).neovim;
-	};
+			flake = {
+				lib.genSystem = import ./lib/genSystem.nix { inherit inputs; };
+			};
+
+			perSystem = { pkgs, ... }: {
+				packages.nvf = (nvf.lib.neovimConfiguration {
+					inherit pkgs;
+					modules = [ ./packages/nvf.nix ];
+				}).neovim;
+			};
+		});
 }
