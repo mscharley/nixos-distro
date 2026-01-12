@@ -1,4 +1,4 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
 	virtualisation = {
 		podman.enable = true;
@@ -17,11 +17,5 @@
 
 		# GUI tools
 		dbeaver-bin
-	];
-
-	# ASDF support
-	programs.nix-ld.enable = lib.mkDefault true;
-	programs.nix-ld.libraries = with pkgs; [
-		# Add any custom libraries needed here
 	];
 }
