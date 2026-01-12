@@ -58,8 +58,8 @@ in (nixpkgs.lib.nixosSystem {
 		(map (r: ../roles/${r}.nix) roles) ++
 		(map (s: ../services/${s}.nix) services) ++
 		modules ++ users ++ [
-			../hardware/cpu.${cpu}.nix
-			../hardware/gpu.${gpu}.nix
+			../hardware/cpu/${cpu}.nix
+			../hardware/gpu/${gpu}.nix
 			../desktops/${desktop}.nix
 			../form-factors/${formFactor}.nix
 			inputs.home-manager.nixosModules.home-manager
