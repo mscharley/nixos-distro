@@ -12,6 +12,11 @@
 	roles ? [],
 	services ? [],
 	modules ? [],
+	allowUnfreePackages ? [
+		"1password" "1password-cli"
+		"discord"
+		"steam" "steam-unwrapped" "steamcmd"
+	],
 }: let
 	nixpkgs = inputs.nixpkgs;
 	sharedConfig = { gpu ? "none" }: {
@@ -19,11 +24,7 @@
 		cudaSupport = nixpkgs.lib.mkIf (gpu == "nvidia") true;
 
 		# Global whitelist of specific non-free packages which are acceptable.
-		allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-			"1password" "1password-cli"
-			"discord"
-			"steam" "steam-unwrapped" "steamcmd"
-		];
+		allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) allowUnfreePackages;
 	};
 	pkgs = import inputs.nixpkgs {
 		inherit system;
@@ -31,6 +32,10 @@
 		config = sharedConfig { inherit gpu; };
 
 		overlays = [
+			# Include our packages in pkgs under the distro namespace
+			(_final: prev: {
+				distro = inputs.self.packages.${system};
+			})
 			# https://lix.systems/add-to-config/#advanced-change
 			(_final: prev: {
 				inherit (prev.lixPackageSets.stable)
@@ -38,9 +43,6 @@
 					nix-eval-jobs
 					nix-fast-build
 					colmena;
-			})
-			(_final: prev: {
-				distro = inputs.self.packages.${system};
 			})
 		];
 	};
