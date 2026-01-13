@@ -7,6 +7,8 @@ Name pending. This is mostly a proof of concept for distribution of something ak
 I'm currently running this as a daily driver on multiple real systems, however for now installation instructions are beyond the scope of this document. Sufficed to say, you should be able to get going as if you were installing NixOS via a flake normally however. You will still want to use `nixos-generate-config` to generate hardware-specific configuration for your system. My current `flake.nix` for my main system looks like the following:
 
 ```nix
+# flake.nix
+
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running `nixos-help`).
@@ -51,5 +53,27 @@ I'm currently running this as a daily driver on multiple real systems, however f
 			modules = commonModules ++ [ ./hosts/desktop/configuration.nix ];
 		};
 	};
+}
+```
+
+```nix
+# users/matthew/default.nix
+
+{
+    # Custom system-level NixOS modules needed for this user.
+    modules = [];
+
+    # User description, as per users.users.${username} in a normal NixOS configuration.
+    user = { pkgs, ... }: {
+        isNormalUser = true;
+        description = "User Name";
+        extraGroups = [ "wheel" ];
+        shell = pkgs.fish;
+
+        # openssh.authorizedKeys.keyFiles = [ ./authorized_keys ];
+    };
+
+    # Path to a home manager module to use for this user account, if desired.
+    # home-manager = ./home.nix;
 }
 ```
