@@ -23,7 +23,7 @@ I'm currently running this as a daily driver on multiple real systems, however f
 		commonServices = [ "tailscale" "1password" ];
 	in {
 		users = {
-			matthew = distro.lib.genUser "matthew" (import ./users/matthew);
+			matthew = distro.lib.genUser ./users/matthew;
 		};
 
 		nixosConfigurations.fw13 = distro.lib.genSystem {
