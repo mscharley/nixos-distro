@@ -2,7 +2,7 @@
 {
 	imports = [
 		../roles/graphical.nix
-	] ++ (if (desktop == "niri") then [ ../services/sddm.nix ] else []);
+	] ++ (if (desktop == "niri") then [ ./display-managers/sddm.nix ] else []);
 
 	programs.niri.enable = true;
 

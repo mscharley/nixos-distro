@@ -2,7 +2,7 @@
 {
 	imports = [
 		../roles/graphical.nix
-	] ++ (if (desktop == "kde") then [ ../services/sddm.nix ] else []);
+	] ++ (if (desktop == "kde") then [ ./display-managers/plasma-login-manager.nix ] else []);
 
 	# Enable the KDE Plasma Desktop Environment
 	services.desktopManager.plasma6.enable = true;
@@ -37,7 +37,7 @@
 		kdiff3
 
 		# System admin tools
-		kdePackages.flatpak-kcm kdePackages.sddm-kcm
+		kdePackages.flatpak-kcm
 		kdePackages.ksystemlog kdePackages.isoimagewriter
 
 		# Gnome compatibility
