@@ -7,7 +7,6 @@ in {
 		../hardware/btrfs.nix
 		../services/sshd.nix
 		../services/command-not-found.nix
-		../services/secureboot.nix
 	];
 
 	config = lib.mkMerge [

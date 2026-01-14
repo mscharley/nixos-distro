@@ -61,7 +61,6 @@ in (nixpkgs.lib.nixosSystem {
 			../hardware/gpu/${gpu}.nix
 			../desktops/${desktop}.nix
 			../form-factors/${formFactor}.nix
-			inputs.lanzaboote.nixosModules.lanzaboote
 			inputs.home-manager.nixosModules.home-manager
 			{
 				# Set a default hostname based on configuration

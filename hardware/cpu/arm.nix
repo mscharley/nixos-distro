@@ -1,4 +1,4 @@
 { ... }:
 {
-	# no-op
+	imports = [ ./bootloader/systemd-boot.nix ];
 }
