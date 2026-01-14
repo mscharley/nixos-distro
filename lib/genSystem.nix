@@ -12,6 +12,7 @@
 	roles ? [],
 	services ? [],
 	modules ? [],
+	homeManagerModules ? [],
 	allowUnfreePackages ? [
 		"1password" "1password-cli"
 		"discord"
@@ -74,7 +75,7 @@ in (nixpkgs.lib.nixosSystem {
 				home-manager.sharedModules = [
 					inputs.nix-flatpak.homeManagerModules.nix-flatpak
 					inputs.plasma-manager.homeModules.plasma-manager
-				];
+				] ++ homeManagerModules;
 			}
 		];
 })
