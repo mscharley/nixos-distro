@@ -1,6 +1,9 @@
-{ ... }:
+{ distro-inputs, ... }:
 {
-	imports = [ ./bootloader/secureboot.nix ];
+	imports = [
+		distro-inputs.nixos-hardware.nixosModules.common-cpu-amd
+		./bootloader/secureboot.nix
+	];
 
 	hardware.cpu.amd.updateMicrocode = true;
 }

@@ -33,6 +33,7 @@ I'm currently running this as a daily driver on multiple real systems, however f
 			system = "x86_64-linux";
 			formFactor = "laptop";
 			cpu = "intel";
+			hardwareProfile = "framework-12th-gen-intel";
 			hardware = [ "bluetooth" ];
 			roles = [ "software-development" ];
 			services = commonServices ++ [ "discord" ];

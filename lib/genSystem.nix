@@ -7,6 +7,8 @@
 	formFactor ? "desktop",
 	desktop ? if formFactor == "server" then "none" else "kde",
 	users ? [],
+	# https://github.com/NixOS/nixos-hardware?tab=readme-ov-file#list-of-profiles
+	hardwareProfile ? null,
 	hardware ? [],
 	extraDesktops ? [],
 	roles ? [],
@@ -20,6 +22,7 @@
 	],
 }: let
 	nixpkgs = inputs.nixpkgs;
+	nixosHardware = if hardwareProfile == null then [] else [ inputs.nixos-hardware.nixosModules.${hardwareProfile} ];
 	pkgs = import inputs.nixpkgs {
 		inherit system;
 
@@ -48,7 +51,7 @@
 	};
 	specialArgs = {
 		inherit desktop cpu gpu;
-		flake-inputs = inputs;
+		distro-inputs = inputs;
 	};
 in (nixpkgs.lib.nixosSystem {
 	inherit specialArgs;
@@ -57,7 +60,7 @@ in (nixpkgs.lib.nixosSystem {
 		(map (de: ../desktops/${de}.nix) extraDesktops) ++
 		(map (r: ../roles/${r}.nix) roles) ++
 		(map (s: ../services/${s}.nix) services) ++
-		modules ++ users ++ [
+		modules ++ users ++ nixosHardware ++ [
 			../hardware/cpu/${cpu}.nix
 			../hardware/gpu/${gpu}.nix
 			../desktops/${desktop}.nix

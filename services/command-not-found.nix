@@ -1,7 +1,7 @@
-{ flake-inputs, ... }:
+{ distro-inputs, ... }:
 {
 	# Import the upstream module
-	imports = [ flake-inputs.nix-index-database.nixosModules.nix-index ];
+	imports = [ distro-inputs.nix-index-database.nixosModules.nix-index ];
 
 	# A lot of this is set automatically by nix-index-database, but we're explicit about forcing these options here.
 	programs.command-not-found.enable = false;

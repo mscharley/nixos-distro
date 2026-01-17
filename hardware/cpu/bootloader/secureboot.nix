@@ -1,6 +1,6 @@
-{ lib, pkgs, flake-inputs, ... }:
+{ lib, pkgs, distro-inputs, ... }:
 {
-	imports = [ flake-inputs.lanzaboote.nixosModules.lanzaboote ];
+	imports = [ distro-inputs.lanzaboote.nixosModules.lanzaboote ];
 
 	# Use the systemd-boot EFI boot loader.
 	boot.initrd = {
