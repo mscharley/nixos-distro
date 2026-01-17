@@ -52,6 +52,7 @@
 	specialArgs = {
 		inherit desktop cpu gpu;
 		distro-inputs = inputs;
+		userNames = map (u: u.userName) users;
 	};
 in (nixpkgs.lib.nixosSystem {
 	inherit specialArgs;
@@ -60,7 +61,7 @@ in (nixpkgs.lib.nixosSystem {
 		(map (de: ../desktops/${de}.nix) extraDesktops) ++
 		(map (r: ../roles/${r}.nix) roles) ++
 		(map (s: ../services/${s}.nix) services) ++
-		modules ++ users ++ nixosHardware ++ [
+		modules ++ (map (u: u.module) users) ++ nixosHardware ++ [
 			../hardware/cpu/${cpu}.nix
 			../hardware/gpu/${gpu}.nix
 			../desktops/${desktop}.nix
