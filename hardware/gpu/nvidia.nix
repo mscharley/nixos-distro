@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ distro-inputs, ... }:
 {
 	imports = [
-		inputs.nixos-hardware.nixosModules.common-gpu-nvidia
+		distro-inputs.nixos-hardware.nixosModules.common-gpu-nvidia
 	];
 
 	hardware.graphics = {

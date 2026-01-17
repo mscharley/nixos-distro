@@ -51,7 +51,7 @@
 	};
 	specialArgs = {
 		inherit desktop cpu gpu;
-		flake-inputs = inputs;
+		distro-inputs = inputs;
 	};
 in (nixpkgs.lib.nixosSystem {
 	inherit specialArgs;

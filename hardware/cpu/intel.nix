@@ -1,7 +1,7 @@
-{ inputs, ... }:
+{ distro-inputs, ... }:
 {
 	imports = [
-		inputs.nixos-hardware.nixosModules.common-cpu-intel
+		distro-inputs.nixos-hardware.nixosModules.common-cpu-intel
 		./bootloader/secureboot.nix
 	];
 
