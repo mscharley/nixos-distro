@@ -22,7 +22,13 @@
 	],
 }: let
 	nixpkgs = inputs.nixpkgs;
-	nixosHardware = if hardwareProfile == null then [] else [ inputs.nixos-hardware.nixosModules.${hardwareProfile} ];
+	defaultHardware = let hardware = inputs.nixos-hardware.nixosModules; in
+		if formFactor == "laptop"
+		then [ hardware.common-pc-laptop hardware.common-pc-laptop-ssd ]
+		else [ hardware.common-pc hardware.common-pc-ssd ];
+	nixosHardware =
+		if hardwareProfile == null then defaultHardware
+		else [ inputs.nixos-hardware.nixosModules.${hardwareProfile} ];
 	pkgs = import inputs.nixpkgs {
 		inherit system;
 

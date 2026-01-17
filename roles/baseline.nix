@@ -35,6 +35,7 @@ in {
 
 			# Use latest kernel by default
 			boot.kernelPackages = lib.mkDefault pkgs.linuxPackages_latest;
+			hardware.enableRedistributableFirmware = true;
 
 			# Enable networking via networkmanager
 			networking.networkmanager.enable = true;
