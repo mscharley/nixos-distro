@@ -12,6 +12,7 @@
 			hostname = "laptop";
 			system = "x86_64-linux";
 			formFactor = "laptop";
+			hardwareProfile = "framework-12th-gen-intel";
 			cpu = "intel";
 			roles = [ "software-development" ];
 			services = commonServices ++ [ "discord" ];
