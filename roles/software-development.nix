@@ -1,17 +1,9 @@
 { pkgs, ... }:
 {
-	virtualisation = {
-		podman.enable = true;
-		podman.extraPackages = with pkgs; [
-			podman-compose
-		];
-		libvirtd.enable = true;
-		spiceUSBRedirection.enable = true;
-	};
-	programs.virt-manager.enable = true;
+	imports = [ ./container-host.nix ./vm-host.nix ];
+
 	environment.systemPackages = with pkgs; [
 		# CLI tools
-		kubectl
 		socat
 		openssl
 
