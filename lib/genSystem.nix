@@ -52,7 +52,6 @@
 	specialArgs = {
 		inherit desktop cpu gpu;
 		distro-inputs = inputs;
-		userNames = map (u: u.userName) users;
 	};
 in (nixpkgs.lib.nixosSystem {
 	inherit specialArgs;

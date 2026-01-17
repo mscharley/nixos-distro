@@ -1,9 +1,9 @@
-{ userNames, ... }:
+{ config, ... }:
 {
 	programs._1password.enable = true;
 	programs._1password-gui = {
 		enable = true;
-		polkitPolicyOwners = userNames;
+		polkitPolicyOwners = builtins.attrNames config.users.users;
 	};
 
 	# Required for system authentication support
