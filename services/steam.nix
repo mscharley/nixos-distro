@@ -17,6 +17,6 @@
 	environment.systemPackages = with pkgs; [
 		steamcmd
 		mangohud mangojuice
-		protonup-qt
+		protonplus
 	];
 }
