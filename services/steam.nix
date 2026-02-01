@@ -1,5 +1,9 @@
 { pkgs, ...}:
 {
+	imports = [
+		./proton.nix
+	];
+
 	hardware.steam-hardware.enable = true;
 
 	programs.steam = {
@@ -17,6 +21,5 @@
 	environment.systemPackages = with pkgs; [
 		steamcmd
 		mangohud mangojuice
-		protonplus
 	];
 }
