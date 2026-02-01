@@ -8,6 +8,6 @@
 	];
 
 	environment.systemPackages = with pkgs; [
-		lutris
+		lutris gamescope
 	];
 }

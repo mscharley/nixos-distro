@@ -12,14 +12,11 @@
 
 		localNetworkGameTransfers.openFirewall = true;
 		remotePlay.openFirewall = true;
-
-		extraPackages = with pkgs; [
-			gamescope
-		];
 	};
 
 	environment.systemPackages = with pkgs; [
 		steamcmd
+		gamescope
 		mangohud mangojuice
 	];
 }
