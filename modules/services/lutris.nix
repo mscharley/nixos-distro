@@ -1,11 +1,13 @@
 { pkgs, ... }:
 {
-	environment.systemPackages = with pkgs; [
-		lutris
+	imports = [
+		./proton.nix
+		# Lutris doesn't generally use the system wine directly, but having one available is recommended to ensure
+		# dependencies are available
+		./wine.nix
+	];
 
-		# Lutris doesn't generally use the system wine directly, but having one available does ensure dependencies are
-		# available
-		wineWowPackages.stable
-		winetricks
+	environment.systemPackages = with pkgs; [
+		lutris gamescope
 	];
 }
