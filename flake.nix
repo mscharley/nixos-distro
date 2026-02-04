@@ -12,6 +12,11 @@
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 
+		disko = {
+			url = "github:nix-community/disko/latest";
+			inputs.nixpkgs.follows = "nixpkgs";
+		};
+
 		home-manager = {
 			url = "github:nix-community/home-manager/master";
 			inputs.nixpkgs.follows = "nixpkgs";
@@ -39,19 +44,21 @@
 		};
 	};
 
-	outputs = inputs@{ flake-parts, nvf, ... }:
-		flake-parts.lib.mkFlake { inherit inputs; } ({ ... }: {
+	outputs = inputs:
+		inputs.flake-parts.lib.mkFlake { inherit inputs; } ({ ... }: {
 			systems = [ "x86_64-linux" "aarch64-linux" ];
 
-			flake = {
+			flake = { ... }: {
 				lib.genSystem = import ./lib/genSystem.nix { inherit inputs; };
 				lib.genUser = import ./lib/genUser.nix;
+
+				nixosConfigurations.installer = import ./nixosConfigurations/installer { inherit inputs; };
 			};
 
 			perSystem = { pkgs, ... }: {
-				packages.nvf = (nvf.lib.neovimConfiguration {
+				packages.nvf = (inputs.nvf.lib.neovimConfiguration {
 					inherit pkgs;
-					modules = [ ./packages/nvf.nix ];
+					modules = [ ./packages/nvf ];
 				}).neovim;
 			};
 		});

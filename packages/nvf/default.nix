@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
 	imports = [
-		./nvf/fzf-lua.nix
+		./fzf-lua.nix
 	];
 
 	config.vim = {

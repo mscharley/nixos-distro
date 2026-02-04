@@ -2,6 +2,12 @@
 
 Name pending. This is mostly a proof of concept for distribution of something akin to a branched distribution of NixOS based on this flake for managing the changes over base NixOS.
 
+## Create your own installation media
+
+```sh
+nix build .#nixosConfigurations.installer.config.system.build.isoImage
+```
+
 ## Installation
 
 I'm currently running this as a daily driver on multiple real systems, however for now installation instructions are beyond the scope of this document. Sufficed to say, you should be able to get going as if you were installing NixOS via a flake normally however. You will still want to use `nixos-generate-config` to generate hardware-specific configuration for your system. My current `flake.nix` for my main system looks like the following:

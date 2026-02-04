@@ -29,7 +29,7 @@
 	nixosHardware =
 		if hardwareProfile == null then defaultHardware
 		else [ inputs.nixos-hardware.nixosModules.${hardwareProfile} ];
-	pkgs = import inputs.nixpkgs {
+	pkgs = import nixpkgs {
 		inherit system;
 
 		config = {
@@ -41,18 +41,8 @@
 		};
 
 		overlays = [
-			# Include our packages in pkgs under the distro namespace
-			(_final: prev: {
-				distro = inputs.self.packages.${system};
-			})
-			# https://lix.systems/add-to-config/#advanced-change
-			(_final: prev: {
-				inherit (prev.lixPackageSets.stable)
-					nixpkgs-review
-					nix-eval-jobs
-					nix-fast-build
-					colmena;
-			})
+			(import ../overlays/self-packages.nix { self = inputs.self; })
+			(import ../overlays/lix.nix)
 		];
 	};
 	specialArgs = {
@@ -62,15 +52,19 @@
 in (nixpkgs.lib.nixosSystem {
 	inherit specialArgs;
 	inherit pkgs;
-	modules = (map (hw: ../hardware/${hw}.nix) hardware) ++
-		(map (de: ../desktops/${de}.nix) extraDesktops) ++
-		(map (r: ../roles/${r}.nix) roles) ++
-		(map (s: ../services/${s}.nix) services) ++
-		modules ++ (map (u: u.module) users) ++ nixosHardware ++ [
-			../hardware/cpu/${cpu}.nix
-			../hardware/gpu/${gpu}.nix
-			../desktops/${desktop}.nix
-			../form-factors/${formFactor}.nix
+	modules = modules ++ nixosHardware ++
+		(map (hw: ../modules/hardware/${hw}.nix) hardware) ++
+		(map (de: ../modules/desktops/${de}.nix) extraDesktops) ++
+		(map (r: ../modules/roles/${r}.nix) roles) ++
+		(map (s: ../modules/services/${s}.nix) services) ++
+		(map (u: u.module) users) ++
+		[
+			../modules/config
+			../modules/hardware/cpu/${cpu}.nix
+			../modules/hardware/gpu/${gpu}.nix
+			../modules/desktops/${desktop}.nix
+			../modules/form-factors/${formFactor}.nix
+			inputs.disko.nixosModules.disko
 			inputs.home-manager.nixosModules.home-manager
 			{
 				# Set a default hostname based on configuration
