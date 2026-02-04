@@ -5,7 +5,6 @@ in inputs.nixpkgs.lib.nixosSystem {
 	specialArgs = { flake-inputs = inputs; desktop = "none"; };
 	modules = [
 		"${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel.nix"
-		inputs.disko.nixosModules.disko
 		{
 			nixpkgs.hostPlatform = system;
 			nixpkgs.overlays = [
@@ -13,7 +12,8 @@ in inputs.nixpkgs.lib.nixosSystem {
 				(import ../../overlays/lix.nix)
 			];
 		}
-		../../services/config
+		inputs.disko.nixosModules.disko
+		../../modules/config
 		./config.nix
 	];
 }

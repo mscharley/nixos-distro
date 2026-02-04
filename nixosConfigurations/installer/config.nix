@@ -4,6 +4,7 @@
 		../../modules/services/sshd.nix
 		../../modules/services/tailscale.nix
 		./disko.nix
+		./secure-boot.nix
 	];
 
 	time.timeZone = lib.mkDefault "Etc/UTC";

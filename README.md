@@ -67,20 +67,20 @@ I'm currently running this as a daily driver on multiple real systems, however f
 # users/matthew/default.nix
 
 {
-    # Custom system-level NixOS modules needed for this user.
-    modules = [];
+	# Custom system-level NixOS modules needed for this user.
+	modules = [];
 
-    # User description, as per users.users.${username} in a normal NixOS configuration.
-    user = { pkgs, ... }: {
-        isNormalUser = true;
-        description = "User Name";
-        extraGroups = [ "wheel" ];
-        shell = pkgs.fish;
+	# User description, as per users.users.${username} in a normal NixOS configuration.
+	user = { pkgs, ... }: {
+		isNormalUser = true;
+		description = "User Name";
+		extraGroups = [ "wheel" ];
+		shell = pkgs.fish;
 
-        # openssh.authorizedKeys.keyFiles = [ ./authorized_keys ];
-    };
+		# openssh.authorizedKeys.keyFiles = [ ./authorized_keys ];
+	};
 
-    # Path to a home manager module to use for this user account, if desired.
-    # home-manager = ./home.nix;
+	# Path to a home manager module to use for this user account, if desired.
+	# home-manager = ./home.nix;
 }
 ```
