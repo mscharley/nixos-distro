@@ -59,10 +59,12 @@ in (nixpkgs.lib.nixosSystem {
 		(map (s: ../modules/services/${s}.nix) services) ++
 		(map (u: u.module) users) ++
 		[
+			../modules/config
 			../modules/hardware/cpu/${cpu}.nix
 			../modules/hardware/gpu/${gpu}.nix
 			../modules/desktops/${desktop}.nix
 			../modules/form-factors/${formFactor}.nix
+			inputs.disko.nixosModules.disko
 			inputs.home-manager.nixosModules.home-manager
 			{
 				# Set a default hostname based on configuration

@@ -1,4 +1,4 @@
-{ lib, pkgs, gpu, ... }:
+{ config, lib, pkgs, gpu, ... }:
 let
 	amdgpu = gpu == "amd";
 in {
@@ -55,7 +55,7 @@ in {
 				screen
 
 				# Software
-				vim distro.nvf
+				nano config.distro.package distro.nvf
 				git git-lfs gcc
 				fastfetch hyfetch
 				tree

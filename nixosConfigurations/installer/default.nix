@@ -1,4 +1,4 @@
-{ inputs, self }:
+{ inputs }:
 let
 	system = "x86_64-linux";
 in inputs.nixpkgs.lib.nixosSystem {
@@ -9,10 +9,11 @@ in inputs.nixpkgs.lib.nixosSystem {
 		{
 			nixpkgs.hostPlatform = system;
 			nixpkgs.overlays = [
-				(import ../../overlays/self-packages.nix { inherit self; })
+				(import ../../overlays/self-packages.nix { self = inputs.self; })
 				(import ../../overlays/lix.nix)
 			];
 		}
+		../../services/config
 		./config.nix
 	];
 }

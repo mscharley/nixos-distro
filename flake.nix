@@ -44,7 +44,7 @@
 		};
 	};
 
-	outputs = inputs@{ self, ... }:
+	outputs = inputs:
 		inputs.flake-parts.lib.mkFlake { inherit inputs; } ({ ... }: {
 			systems = [ "x86_64-linux" "aarch64-linux" ];
 
@@ -52,7 +52,7 @@
 				lib.genSystem = import ./lib/genSystem.nix { inherit inputs; };
 				lib.genUser = import ./lib/genUser.nix;
 
-				nixosConfigurations.installer = import ./nixosConfigurations/installer { inherit inputs self; };
+				nixosConfigurations.installer = import ./nixosConfigurations/installer { inherit inputs; };
 			};
 
 			perSystem = { pkgs, ... }: {
