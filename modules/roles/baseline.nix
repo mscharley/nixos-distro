@@ -55,7 +55,7 @@ in {
 				screen
 
 				# Software
-				nano config.distro.package distro.nvf
+				nano config.distro.editor distro.nvf
 				git git-lfs gcc
 				fastfetch hyfetch
 				tree
