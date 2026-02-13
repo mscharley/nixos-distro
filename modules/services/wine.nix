@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
 	environment.systemPackages = with pkgs; [
-		wineWowPackages.stable
+		wineWow64Packages.stable
 		winetricks
 	];
 }
