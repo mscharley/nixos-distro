@@ -68,7 +68,7 @@ in (nixpkgs.lib.nixosSystem {
 				networking.hostName = nixpkgs.lib.mkDefault hostname;
 
 				# Set up home manager
-				home-manager.useGlobalPkgs = false;
+				home-manager.useGlobalPkgs = true;
 				home-manager.useUserPackages = true;
 				home-manager.extraSpecialArgs = specialArgs;
 				home-manager.backupFileExtension = "backup";
