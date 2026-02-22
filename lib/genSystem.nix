@@ -15,11 +15,8 @@
 	services ? [],
 	modules ? [],
 	homeManagerModules ? [],
-	allowUnfreePackages ? [
-		"1password" "1password-cli"
-		"discord"
-		"steam" "steam-unwrapped" "steamcmd"
-	],
+	allowUnfreePackages ? [],
+	overlays ? [],
 }: let
 	nixpkgs = inputs.nixpkgs;
 	defaultHardware = let hardware = inputs.nixos-hardware.nixosModules; in
@@ -40,7 +37,7 @@
 			allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) allowUnfreePackages;
 		};
 
-		overlays = [
+		overlays = overlays ++ [
 			(import ../overlays/self-packages.nix { self = inputs.self; })
 			(import ../overlays/lix.nix)
 		];

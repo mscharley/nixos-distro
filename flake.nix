@@ -37,11 +37,6 @@
 		flake-parts.url = "github:hercules-ci/flake-parts/main";
 
 		nix-flatpak.url = "github:gmodena/nix-flatpak/main";
-
-		nvf = {
-			url = "github:notashelf/nvf/main";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
 	};
 
 	outputs = inputs:
@@ -55,11 +50,7 @@
 				nixosConfigurations.installer = import ./nixosConfigurations/installer { inherit inputs; };
 			};
 
-			perSystem = { pkgs, ... }: {
-				packages.nvf = (inputs.nvf.lib.neovimConfiguration {
-					inherit pkgs;
-					modules = [ ./packages/nvf ];
-				}).neovim;
+			perSystem = { ... }: {
 			};
 		});
 }
