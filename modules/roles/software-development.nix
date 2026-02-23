@@ -6,6 +6,7 @@
 		# CLI tools
 		socat
 		openssl
+		bat
 
 		# GUI tools
 		dbeaver-bin
