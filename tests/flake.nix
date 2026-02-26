@@ -7,6 +7,11 @@
 
 	outputs = { distro, ... }: let
 		commonServices = [ "tailscale" "1password" ];
+		allowUnfreePackages = [
+			"steam" "steam-unwrapped" "steamcmd"
+			"1password" "1password-cli"
+			"discord"
+		];
 	in {
 		nixosConfigurations.laptop = distro.lib.genSystem {
 			hostname = "laptop";
@@ -17,6 +22,7 @@
 			roles = [ "software-development" ];
 			services = commonServices ++ [ "discord" ];
 			modules = [ ./dummy-hardware.nix ];
+			allowUnfreePackages = allowUnfreePackages;
 		};
 		nixosConfigurations.desktop = distro.lib.genSystem {
 			hostname = "desktop";
@@ -26,6 +32,7 @@
 			roles = [ "software-development" "gaming" ];
 			services = commonServices ++ [ "discord" ];
 			modules = [ ./dummy-hardware.nix ];
+			allowUnfreePackages = allowUnfreePackages;
 		};
 		nixosConfigurations.arm = distro.lib.genSystem {
 			hostname = "arm";
@@ -34,6 +41,7 @@
 			cpu = "arm";
 			roles = [ "software-development" ];
 			modules = [ ./dummy-hardware.nix ];
+			allowUnfreePackages = allowUnfreePackages;
 		};
 	};
 }
