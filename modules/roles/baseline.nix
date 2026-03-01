@@ -63,9 +63,16 @@ in {
 				zip unzip xz
 				zbar
 			];
-			programs.direnv.enable = true;
 			programs.usbtop.enable = true;
 			programs.iotop.enable = true;
+			programs.direnv = {
+				enable = true;
+				settings = {
+					global = {
+						warn_timeout = "0";
+					};
+				};
+			};
 
 			security = {
 				sudo.enable = false;
