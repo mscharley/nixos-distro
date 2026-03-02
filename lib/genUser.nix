@@ -1,6 +1,6 @@
 userDefinitionFile: let
-	userName = baseNameOf userDefinitionFile;
-	def = import userDefinitionFile;
+	def = if builtins.typeOf userDefinitionFile == "path" then import userDefinitionFile else userDefinitionFile;
+	userName = if def ? "userName" then def.userName else baseNameOf userDefinitionFile;
 in {
 	inherit userName;
 
