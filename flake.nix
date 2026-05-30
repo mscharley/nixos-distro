@@ -1,56 +1,71 @@
 {
-	description = "Definitions for deploying my distribution of NixOS";
+  description = "Definitions for deploying my distribution of NixOS";
 
-	inputs = {
-		# Official dependencies
-		nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-		nixos-hardware.url = "github:NixOS/nixos-hardware/master";
+  inputs = {
+    # Official dependencies
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-		# Community dependencies
-		nix-index-database = {
-			url = "github:nix-community/nix-index-database/main";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+    nixos-hardware = {
+      url = "github:NixOS/nixos-hardware/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		disko = {
-			url = "github:nix-community/disko/latest";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+    # Community dependencies
+    nix-index-database = {
+      url = "github:nix-community/nix-index-database/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		home-manager = {
-			url = "github:nix-community/home-manager/master";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+    disko = {
+      url = "github:nix-community/disko/latest";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		plasma-manager = {
-			url = "github:nix-community/plasma-manager/trunk";
-			inputs.nixpkgs.follows = "nixpkgs";
-			inputs.home-manager.follows = "home-manager";
-		};
+    home-manager = {
+      url = "github:nix-community/home-manager/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		lanzaboote = {
-			url = "github:nix-community/lanzaboote/v1.0.0";
-			inputs.nixpkgs.follows = "nixpkgs";
-		};
+    plasma-manager = {
+      url = "github:nix-community/plasma-manager/trunk";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
+    };
 
-		# Third-party extensions
-		flake-parts.url = "github:hercules-ci/flake-parts/main";
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote/v1.0.0";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
-		nix-flatpak.url = "github:gmodena/nix-flatpak/main";
-	};
+    # Third-party extensions
+    flake-parts.url = "github:hercules-ci/flake-parts/main";
 
-	outputs = inputs:
-		inputs.flake-parts.lib.mkFlake { inherit inputs; } ({ ... }: {
-			systems = [ "x86_64-linux" "aarch64-linux" ];
+    nix-flatpak.url = "github:gmodena/nix-flatpak/main";
+  };
 
-			flake = { ... }: {
-				lib.genSystem = import ./lib/genSystem.nix { inherit inputs; };
-				lib.genUser = import ./lib/genUser.nix;
+  outputs =
+    inputs:
+    inputs.flake-parts.lib.mkFlake { inherit inputs; } (
+      { ... }:
+      {
+        systems = [
+          "x86_64-linux"
+          "aarch64-linux"
+        ];
 
-				nixosConfigurations.installer = import ./nixosConfigurations/installer { inherit inputs; };
-			};
+        flake =
+          { ... }:
+          {
+            lib.genSystem = import ./lib/genSystem.nix { inherit inputs; };
+            lib.genUser = import ./lib/genUser.nix;
 
-			perSystem = { ... }: {
-			};
-		});
+            nixosConfigurations.installer = import ./nixosConfigurations/installer { inherit inputs; };
+          };
+
+        perSystem =
+          { ... }:
+          {
+          };
+      }
+    );
 }
