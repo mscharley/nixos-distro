@@ -5,6 +5,7 @@
       "docker-credential-helper"
     ];
     casks = [
+      "docker"
       "docker-desktop"
     ];
   };
