@@ -1,5 +1,4 @@
 {
-  config,
   lib,
   pkgs,
   gpu,
@@ -10,7 +9,6 @@ let
 in
 {
   imports = [
-    ./shared.nix
     # Other base services
     ../../nixos/hardware/btrfs.nix
     ../../services/sshd/nixos.nix

@@ -1,5 +1,9 @@
 { pkgs, ... }:
 {
+  imports = [
+    ../../services/command-not-found/darwin.nix
+  ];
+
   # Every once in a while, nix-darwin may change configuration defaults in a way
   # incompatible with stateful data. Pin to the current release to avoid surprise
   # changes; bump deliberately after reading `darwin-rebuild changelog`.
