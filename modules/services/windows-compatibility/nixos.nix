@@ -1,7 +1,7 @@
 { pkgs, ... }:
 {
 	imports = [
-		./wine.nix
+		../wine/nixos.nix
 	];
 
 	environment.systemPackages = with pkgs; [

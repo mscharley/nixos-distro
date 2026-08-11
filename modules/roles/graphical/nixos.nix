@@ -1,10 +1,11 @@
 { pkgs, ... }:
 {
 	imports = [
-		./baseline.nix
-		../services/boot-splash.nix
-		../services/firefox.nix
-		../services/libreoffice.nix
+		../baseline/shared.nix
+		../baseline/nixos.nix
+		../../services/boot-splash/nixos.nix
+		../../services/firefox/nixos.nix
+		../../services/libreoffice/nixos.nix
 	];
 
 	# Explicitly disable the X11 windowing system

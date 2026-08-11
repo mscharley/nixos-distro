@@ -1,7 +1,7 @@
 { pkgs, desktop, ... }:
 {
 	imports = [
-		../roles/graphical.nix
+		../../roles/graphical/nixos.nix
 	] ++ (if (desktop == "niri") then [ ./display-managers/sddm.nix ] else []);
 
 	programs.niri.enable = true;

@@ -37,6 +37,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    nix-darwin = {
+      url = "github:nix-darwin/nix-darwin/master";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Third-party extensions
     flake-parts.url = "github:hercules-ci/flake-parts/main";
 
@@ -51,12 +56,14 @@
         systems = [
           "x86_64-linux"
           "aarch64-linux"
+          "aarch64-darwin"
         ];
 
         flake =
           { ... }:
           {
             lib.genSystem = import ./lib/genSystem.nix { inherit inputs; };
+            lib.genDarwinSystem = import ./lib/genDarwinSystem.nix { inherit inputs; };
             lib.genUser = import ./lib/genUser.nix;
 
             nixosConfigurations.installer = import ./nixosConfigurations/installer { inherit inputs; };

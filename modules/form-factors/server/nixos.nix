@@ -1,7 +1,8 @@
 { lib, pkgs, ... }:
 {
 	imports = [
-		../roles/baseline.nix
+		../../roles/baseline/shared.nix
+		../../roles/baseline/nixos.nix
 	];
 
 	# Use LTS kernel by default

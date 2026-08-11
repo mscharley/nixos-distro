@@ -1,4 +1,7 @@
 { inputs }:
+let
+  resolveModules = import ./resolveModules.nix inputs.nixpkgs.lib "nixos";
+in
 {
   hostname,
   system,
@@ -68,6 +71,7 @@ let
   };
   specialArgs = {
     inherit desktop cpu gpu;
+    platform = "nixos";
     distro-inputs = inputs;
   };
 in
@@ -77,17 +81,17 @@ in
   modules =
     modules
     ++ nixosHardware
-    ++ (map (hw: ../modules/hardware/${hw}.nix) hardware)
-    ++ (map (de: ../modules/desktops/${de}.nix) extraDesktops)
-    ++ (map (r: ../modules/roles/${r}.nix) roles)
-    ++ (map (s: ../modules/services/${s}.nix) services)
+    ++ (map (hw: ../modules/nixos/hardware/${hw}.nix) hardware)
+    ++ (map (de: ../modules/nixos/desktops/${de}.nix) extraDesktops)
+    ++ (resolveModules "roles" roles)
+    ++ (resolveModules "services" services)
+    ++ (resolveModules "form-factors" [ formFactor ])
     ++ (map (u: u.module) users)
     ++ [
       ../modules/config
-      ../modules/hardware/cpu/${cpu}.nix
-      ../modules/hardware/gpu/${gpu}.nix
-      ../modules/desktops/${desktop}.nix
-      ../modules/form-factors/${formFactor}.nix
+      ../modules/nixos/hardware/cpu/${cpu}.nix
+      ../modules/nixos/hardware/gpu/${gpu}.nix
+      ../modules/nixos/desktops/${desktop}.nix
       inputs.disko.nixosModules.disko
       inputs.home-manager.nixosModules.home-manager
       {

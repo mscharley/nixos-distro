@@ -1,7 +1,7 @@
 { pkgs, desktop, ... }:
 {
   imports = [
-    ../roles/graphical.nix
+    ../../roles/graphical/nixos.nix
   ]
   ++ (if (desktop == "kde") then [ ./display-managers/plasma-login-manager.nix ] else [ ]);
 

@@ -1,9 +1,9 @@
 { lib, pkgs, desktop, ... }:
 {
 	imports = [
-		../services/discord.nix
-		../services/steam.nix
-		../services/lutris.nix
+		../../services/discord/nixos.nix
+		../../services/steam/nixos.nix
+		../../services/lutris/nixos.nix
 	];
 
 	environment.systemPackages = lib.mkIf (desktop == "kde") (with pkgs.kdePackages; [

@@ -1,7 +1,7 @@
 { pkgs, ...}:
 {
 	imports = [
-		./proton.nix
+		../proton/nixos.nix
 	];
 
 	hardware.steam-hardware.enable = true;

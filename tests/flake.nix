@@ -43,6 +43,11 @@
 			modules = [ ./dummy-hardware.nix ];
 			allowUnfreePackages = allowUnfreePackages;
 		};
+		darwinConfigurations.mac = distro.lib.genDarwinSystem {
+			username = "tester";
+			system = "aarch64-darwin";
+			roles = [ "software-development" ];
+		};
 	};
 }
 

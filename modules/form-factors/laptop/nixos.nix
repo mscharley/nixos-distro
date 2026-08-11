@@ -1,8 +1,8 @@
 { lib, ... }:
 {
 	imports = [
-		../roles/graphical.nix
-		../hardware/fprintd.nix
+		../../roles/graphical/nixos.nix
+		../../nixos/hardware/fprintd.nix
 	];
 
 	powerManagement.cpuFreqGovernor = lib.mkDefault "powersave";

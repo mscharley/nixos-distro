@@ -22,3 +22,9 @@ jobs:
     - name: Test ARM build
       working-directory: ./tests
       run: nix eval '.#nixosConfigurations."arm".config.system.build.toplevel'
+    - name: Test darwin eval
+      working-directory: ./tests
+      # Eval-only: a Linux runner can't build a darwin closure, but cross-system module
+      # evaluation catches the whole module tree failing to evaluate (undeclared options,
+      # broken imports, etc).
+      run: nix eval '.#darwinConfigurations."mac".config.system.build.toplevel'

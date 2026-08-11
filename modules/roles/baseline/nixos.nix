@@ -4,22 +4,15 @@ let
 in {
 	imports = [
 		# Other base services
-		../hardware/btrfs.nix
-		../services/sshd.nix
-		../services/command-not-found.nix
+		../../nixos/hardware/btrfs.nix
+		../../services/sshd/nixos.nix
+		../../services/command-not-found/nixos.nix
 	];
 
 	config = lib.mkMerge [
 		{
-			nix = {
-				package = pkgs.lixPackageSets.stable.lix;
-				settings = {
-					experimental-features = [ "nix-command" "flakes" ];
-					auto-optimise-store = false;
-				};
-			};
-
 			time.timeZone = lib.mkDefault "Etc/UTC";
+
 			i18n = {
 				defaultLocale = lib.mkDefault "en_US.UTF-8";
 				defaultCharset = lib.mkDefault "UTF-8";
@@ -39,10 +32,6 @@ in {
 
 			# Enable networking via networkmanager
 			networking.networkmanager.enable = true;
-
-			# Enable shells
-			programs.zsh.enable = true;
-			programs.fish.enable = true;
 
 			# List packages installed in system profile.
 			environment.systemPackages = with pkgs; [
@@ -65,14 +54,6 @@ in {
 			];
 			programs.usbtop.enable = true;
 			programs.iotop.enable = true;
-			programs.direnv = {
-				enable = true;
-				settings = {
-					global = {
-						warn_timeout = "0";
-					};
-				};
-			};
 
 			security = {
 				sudo.enable = false;

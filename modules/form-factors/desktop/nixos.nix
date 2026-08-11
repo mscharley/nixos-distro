@@ -1,7 +1,7 @@
 { lib, ... }:
 {
 	imports = [
-		../roles/graphical.nix
+		../../roles/graphical/nixos.nix
 	];
 
 	powerManagement.cpuFreqGovernor = lib.mkDefault "performance";

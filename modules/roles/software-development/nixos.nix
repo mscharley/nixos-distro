@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-	imports = [ ./container-host.nix ./vm-host.nix ];
+	imports = [ ../container-host/nixos.nix ../vm-host/nixos.nix ];
 
 	environment.systemPackages = with pkgs; [
 		# CLI tools

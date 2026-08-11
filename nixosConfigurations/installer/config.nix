@@ -1,8 +1,8 @@
 { lib, pkgs, ... }:
 {
 	imports = [
-		../../modules/services/sshd.nix
-		../../modules/services/tailscale.nix
+		../../modules/services/sshd/nixos.nix
+		../../modules/services/tailscale/nixos.nix
 		./disko.nix
 		./secure-boot.nix
 	];

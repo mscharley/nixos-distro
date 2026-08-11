@@ -1,7 +1,7 @@
 { ... }:
 {
 	imports = [
-		../services/snapper.nix
+		../../services/snapper/nixos.nix
 	];
 	services.btrfs.autoScrub.enable = true;
 }
