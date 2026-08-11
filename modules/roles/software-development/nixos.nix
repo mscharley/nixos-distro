@@ -1,14 +1,17 @@
 { pkgs, ... }:
 {
-	imports = [ ../container-host/nixos.nix ../vm-host/nixos.nix ];
+  imports = [
+    ../container-host/nixos.nix
+    ../vm-host/nixos.nix
+  ];
 
-	environment.systemPackages = with pkgs; [
-		# CLI tools
-		socat
-		openssl
-		bat
+  environment.systemPackages = with pkgs; [
+    # CLI tools
+    socat
+    openssl
+    bat
 
-		# GUI tools
-		dbeaver-bin
-	];
+    # GUI tools
+    dbeaver-bin
+  ];
 }
