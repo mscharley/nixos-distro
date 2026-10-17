@@ -10,9 +10,6 @@
 
   # Disable some of the optional packages
   environment.plasma6.excludePackages = with pkgs; [
-    # Disable X11 session
-    kdePackages.kwin-x11
-
     # Don't include konsole in favour of kitty
     kdePackages.konsole
   ];
