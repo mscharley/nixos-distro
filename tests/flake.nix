@@ -44,7 +44,10 @@
           "gaming"
         ];
         services = commonServices;
-        modules = [ ./dummy-hardware.nix ];
+        modules = [
+          ./dummy-hardware.nix
+          { distro.secureboot.measuredBoot.enable = true; }
+        ];
         allowUnfreePackages = allowUnfreePackages;
       };
       nixosConfigurations.arm = distro.lib.genSystem {
