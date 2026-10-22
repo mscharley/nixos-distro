@@ -2,10 +2,6 @@
 {
 	imports = [ distro-inputs.lanzaboote.nixosModules.lanzaboote ];
 
-	# Use the systemd-boot EFI boot loader.
-	boot.initrd = {
-		systemd.enable = true;
-	};
 	boot.loader = {
 		# Lanzaboote currently replaces the systemd-boot module.
 		# This setting is usually set to true in configuration.nix
