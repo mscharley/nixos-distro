@@ -27,7 +27,6 @@ let
 
     overlays = overlays ++ [
       (import ../overlays/self-packages.nix { self = inputs.self; })
-      (import ../overlays/lix.nix)
     ];
   };
   specialArgs = {

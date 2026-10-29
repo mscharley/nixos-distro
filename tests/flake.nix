@@ -20,6 +20,7 @@
         "1password-cli"
         "discord"
         "discord-unwrapped"
+        "symbola"
       ];
     in
     {

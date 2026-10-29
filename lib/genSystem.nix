@@ -55,7 +55,6 @@ let
 
     overlays = overlays ++ [
       (import ../overlays/self-packages.nix { self = inputs.self; })
-      (import ../overlays/lix.nix)
       # https://github.com/NixOS/nixpkgs/issues/540025
       (final: prev: {
         python314Packages = prev.python314Packages.overrideScope (

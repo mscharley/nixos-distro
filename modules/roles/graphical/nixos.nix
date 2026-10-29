@@ -3,6 +3,7 @@
 	imports = [
 		../baseline/shared.nix
 		../baseline/nixos.nix
+		../baseline/fonts.nix
 		../../services/boot-splash/nixos.nix
 		../../services/firefox/nixos.nix
 		../../services/libreoffice/nixos.nix
@@ -51,18 +52,6 @@
 	fonts = {
 		enableDefaultPackages = true;
 		packages = with pkgs; [
-			# Custom fonts
-			noto-fonts
-			noto-fonts-lgc-plus
-			noto-fonts-cjk-sans
-			noto-fonts-cjk-serif
-			noto-fonts-color-emoji
-
-			# Coding fonts
-			nerd-fonts.symbols-only
-			fira-code
-			victor-mono
-
 			# Compatibility
 			adwaita-fonts
 		];

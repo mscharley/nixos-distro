@@ -1,19 +1,22 @@
 { inputs }:
 let
-	system = "x86_64-linux";
-in inputs.nixpkgs.lib.nixosSystem {
-	specialArgs = { flake-inputs = inputs; desktop = "none"; };
-	modules = [
-		"${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel.nix"
-		{
-			nixpkgs.hostPlatform = system;
-			nixpkgs.overlays = [
-				(import ../../overlays/self-packages.nix { self = inputs.self; })
-				(import ../../overlays/lix.nix)
-			];
-		}
-		inputs.disko.nixosModules.disko
-		../../modules/config
-		./config.nix
-	];
+  system = "x86_64-linux";
+in
+inputs.nixpkgs.lib.nixosSystem {
+  specialArgs = {
+    flake-inputs = inputs;
+    desktop = "none";
+  };
+  modules = [
+    "${inputs.nixpkgs}/nixos/modules/installer/cd-dvd/installation-cd-minimal-new-kernel.nix"
+    {
+      nixpkgs.hostPlatform = system;
+      nixpkgs.overlays = [
+        (import ../../overlays/self-packages.nix { self = inputs.self; })
+      ];
+    }
+    inputs.disko.nixosModules.disko
+    ../../modules/config
+    ./config.nix
+  ];
 }

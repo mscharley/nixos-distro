@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
   imports = [
+    ./fonts.nix
     ../../services/command-not-found/darwin.nix
   ];
 
@@ -8,12 +9,6 @@
   # incompatible with stateful data. Pin to the current release to avoid surprise
   # changes; bump deliberately after reading `darwin-rebuild changelog`.
   system.stateVersion = 7;
-
-  fonts.packages = with pkgs; [
-    nerd-fonts.symbols-only
-    fira-code
-    victor-mono
-  ];
 
   # No `programs.nh` module on darwin; install it as a plain package instead.
   # config.distro.editor mirrors roles/baseline/nixos.nix's `nano config.distro.editor` —
