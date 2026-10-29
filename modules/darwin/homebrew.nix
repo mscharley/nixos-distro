@@ -9,14 +9,9 @@
     onActivation.cleanup = "none";
 
     taps = [ ];
-    brews = [
-      "awscli"
-    ];
+    brews = [ ];
     casks = [
-      "alfred"
-      "cyberduck"
-      "kitty"
-      "session-manager-plugin"
+      "1password"
     ];
   };
 }
