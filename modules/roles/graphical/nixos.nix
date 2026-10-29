@@ -52,6 +52,9 @@
 	fonts = {
 		enableDefaultPackages = true;
 		packages = with pkgs; [
+			# Colour emoji
+			noto-fonts-color-emoji
+
 			# Compatibility
 			adwaita-fonts
 		];
