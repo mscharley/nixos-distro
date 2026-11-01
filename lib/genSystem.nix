@@ -55,17 +55,6 @@ let
 
     overlays = overlays ++ [
       (import ../overlays/self-packages.nix { self = inputs.self; })
-      # https://github.com/NixOS/nixpkgs/issues/540025
-      (final: prev: {
-        python314Packages = prev.python314Packages.overrideScope (
-          pyFinal: pyPrev: {
-            patool = pyPrev.patool.overridePythonAttrs (_old: {
-              doCheck = false;
-              doInstallCheck = false;
-            });
-          }
-        );
-      })
     ];
   };
   specialArgs = {
