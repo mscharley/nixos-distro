@@ -1,6 +1,7 @@
 { lib, pkgs, desktop, ... }:
 {
 	imports = [
+		../../services/appimage/nixos.nix
 		../../services/discord/nixos.nix
 		../../services/steam/nixos.nix
 		../../services/lutris/nixos.nix
